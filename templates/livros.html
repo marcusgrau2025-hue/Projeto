@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Livros</h2>
+<form method="post">
+  <input name="titulo" placeholder="Título" required>
+  <input name="autor" placeholder="Autor" required>
+  <button type="submit">Cadastrar livro</button>
+</form>
+<form method="get">
+  <input name="q" placeholder="Buscar por título ou autor" value="{{ busca }}">
+  <button type="submit">Buscar</button>
+</form>
+<table>
+  <tr><th>Título</th><th>Autor</th><th>Status</th><th>Ação</th></tr>
+  {% for i, l in lista %}
+  <tr>
+    <td>{{ l.titulo }}</td><td>{{ l.autor }}</td>
+    <td>{{ "Disponível" if l.disponivel else "Emprestado" }}</td>
+    <td><form method="post" action="{{ url_for('excluir_livro', i=i) }}"><button>Excluir</button></form></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">Nenhum livro encontrado.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

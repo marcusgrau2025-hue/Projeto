@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Novo empréstimo</h2>
+<form method="post">
+  <select name="aluno" required>
+    <option value="">Selecione o aluno</option>
+    {% for i, a in alunos %}<option value="{{ i }}">{{ a.nome }}</option>{% endfor %}
+  </select>
+  <select name="livro" required>
+    <option value="">Selecione o livro</option>
+    {% for i, l in disponiveis %}<option value="{{ i }}">{{ l.titulo }}</option>{% endfor %}
+  </select>
+  <button type="submit">Confirmar</button>
+</form>
+<h2>Empréstimos</h2>
+<table>
+  <tr><th>Aluno</th><th>Livro</th><th>Prazo</th><th>Situação</th><th>Ação</th></tr>
+  {% for i, e in lista %}
+  <tr>
+    <td>{{ e.aluno.nome }}</td><td>{{ e.livro.titulo }}</td>
+    <td>{{ e.data_prevista.strftime("%d/%m/%Y") }}</td>
+    <td>
+      {% if e.data_devolucao %}Devolvido
+      {% elif e.esta_atrasado() %}<span class="atrasado">ATRASADO</span>
+      {% else %}Em andamento{% endif %}
+    </td>
+    <td>
+      {% if not e.data_devolucao %}
+      <form method="post" action="{{ url_for('devolver', i=i) }}"><button>Devolver</button></form>
+      {% endif %}
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="5">Nenhum empréstimo registrado.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

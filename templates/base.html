@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Sistema de Biblioteca</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 12px; }
+    nav a { margin-right: 14px; font-weight: bold; text-decoration: none; color: #1a4d8f; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+    th { background: #eef2f7; }
+    .aviso { background: #fff4cc; padding: 8px; margin: 10px 0; border-radius: 4px; }
+    .atrasado { color: #b00020; font-weight: bold; }
+    input, select { padding: 5px; margin: 3px 0; }
+    button { padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Sistema de Biblioteca</h1>
+  <nav>
+    <a href="{{ url_for('index') }}">Início</a>
+    <a href="{{ url_for('pagina_livros') }}">Livros</a>
+    <a href="{{ url_for('pagina_alunos') }}">Alunos</a>
+    <a href="{{ url_for('pagina_emprestimos') }}">Empréstimos</a>
+  </nav>
+  <hr>
+  {% with mensagens = get_flashed_messages() %}
+    {% for m in mensagens %}<div class="aviso">{{ m }}</div>{% endfor %}
+  {% endwith %}
+  {% block conteudo %}{% endblock %}
+</body>
+</html>
