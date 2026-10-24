@@ -21,4 +21,4 @@ Sistema web para controle de livros, alunos e empréstimos, feito em Python com 
 python -m pytest
 
 ## Autor
-Marcus Tulio
+Marcus Tulio e Vitor Hugo
