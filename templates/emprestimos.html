@@ -15,18 +15,17 @@
 <h2>Empréstimos</h2>
 <table>
   <tr><th>Aluno</th><th>Livro</th><th>Prazo</th><th>Situação</th><th>Ação</th></tr>
-  {% for i, e in lista %}
+  {% for e in lista %}
   <tr>
-    <td>{{ e.aluno.nome }}</td><td>{{ e.livro.titulo }}</td>
-    <td>{{ e.data_prevista.strftime("%d/%m/%Y") }}</td>
+    <td>{{ e.aluno }}</td><td>{{ e.livro }}</td><td>{{ e.prazo }}</td>
     <td>
-      {% if e.data_devolucao %}Devolvido
-      {% elif e.esta_atrasado() %}<span class="atrasado">ATRASADO</span>
+      {% if e.devolvido %}Devolvido
+      {% elif e.atrasado %}<span class="atrasado">ATRASADO</span>
       {% else %}Em andamento{% endif %}
     </td>
     <td>
-      {% if not e.data_devolucao %}
-      <form method="post" action="{{ url_for('devolver', i=i) }}"><button>Devolver</button></form>
+      {% if not e.devolvido %}
+      <form method="post" action="{{ url_for('devolver', i=e.id) }}"><button>Devolver</button></form>
       {% endif %}
     </td>
   </tr>

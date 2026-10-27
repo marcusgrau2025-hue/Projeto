@@ -1,8 +1,8 @@
 class Livro:
-    def __init__(self, titulo, autor):
+    def __init__(self, titulo, autor, disponivel=True):
         self.__titulo = titulo
         self.__autor = autor
-        self.__disponivel = True
+        self.__disponivel = disponivel
 
     @property
     def titulo(self):
